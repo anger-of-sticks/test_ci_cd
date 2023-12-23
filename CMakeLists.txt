@@ -49,11 +49,6 @@ link_directories(${Python_LIBRARY_DIRS})
 
 # Add the libxml2 library to the target
 find_library(LIBXML2_LIBRARY libxml2)
-if (LIBXML2_LIBRARY)
-    target_link_libraries(myProject PRIVATE ${LIBXML2_LIBRARY})
-else()
-    message(FATAL_ERROR "libxml2 library not found.")
-endif()
 
 # Test project
 add_executable(myProject PythonCommands.cpp main.cpp)
