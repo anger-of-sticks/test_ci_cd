@@ -47,9 +47,6 @@ find_package(pybind11 CONFIG REQUIRED)
 include_directories(${Python_INCLUDE_DIRS})
 link_directories(${Python_LIBRARY_DIRS})
 
-# Add the libxml2 library to the target
-find_library(LIBXML2_LIBRARY libxml2)
-
 # Test project
 add_executable(myProject PythonCommands.cpp main.cpp)
 target_link_libraries(myProject
