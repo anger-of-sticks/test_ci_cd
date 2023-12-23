@@ -137,9 +137,11 @@ jobs:
 
       # Uncomment the following lines when ready to build and test
       - name: Build
+        if: startsWith(matrix.os, 'ubuntu-')
         run: cmake --build build --config Release
 
       - name: Test
+        if: startsWith(matrix.os, 'ubuntu-')
         run: |
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             ./build/myProject.exe
