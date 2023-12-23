@@ -25,7 +25,6 @@ include_directories(${MAYA_DEVKIT_PATH}/include)
 # Autodesk FBX
 set(FBX_DEVKIT_PATH "fbx/")
 
-
 # Link directories for Autodesk FBX
 link_directories(${FBX_DEVKIT_PATH}/lib/gcc/x64/release)
 include_directories(${FBX_DEVKIT_PATH}/include)
@@ -48,6 +47,14 @@ find_package(pybind11 CONFIG REQUIRED)
 include_directories(${Python_INCLUDE_DIRS})
 link_directories(${Python_LIBRARY_DIRS})
 
+# Add the libxml2 library to the target
+find_library(LIBXML2_LIBRARY libxml2)
+if (LIBXML2_LIBRARY)
+    target_link_libraries(myProject PRIVATE ${LIBXML2_LIBRARY})
+else()
+    message(FATAL_ERROR "libxml2 library not found.")
+endif()
+
 # Test project
 add_executable(myProject PythonCommands.cpp main.cpp)
 target_link_libraries(myProject
@@ -64,11 +71,17 @@ target_link_libraries(myProject
     OpenMayaRender
     OpenMayaUI
     Foundation
-    xml2
     libfbxsdk.a
     pybind11::embed
     pybind11::module
+    ${LIBXML2_LIBRARY}
 )
 
 # Add a Python module, No need to link myPythonModule with myApp
 pybind11_add_module(mush PythonCommands.cpp)
+
+# Set the specific paths for certain libraries using -rpath
+set_target_properties(myProject PROPERTIES
+    INSTALL_RPATH "$ORIGIN;/usr/lib/x86_64-linux-gnu"
+    BUILD_WITH_INSTALL_RPATH TRUE
+)
