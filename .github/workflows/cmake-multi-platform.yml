@@ -139,7 +139,6 @@ jobs:
       - name: Build
         if: startsWith(matrix.os, 'ubuntu-')
         run: |
-          export LDFLAGS="-Wl,--copy-dt-needed-entries"
           cmake --build build --config Release
 
       - name: Test
