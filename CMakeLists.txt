@@ -61,6 +61,7 @@ target_link_libraries(myProject
     OpenMayaUI
     Foundation
     libfbxsdk.a
+    xml2
     pybind11::embed
     pybind11::module
 )
