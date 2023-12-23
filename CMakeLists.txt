@@ -69,6 +69,6 @@ pybind11_add_module(mush PythonCommands.cpp)
 
 # Set the specific paths for certain libraries using -rpath
 set_target_properties(myProject PROPERTIES
-    INSTALL_RPATH "$ORIGIN;/usr/lib/x86_64-linux-gnu"
+    INSTALL_RPATH "$ORIGIN;/usr/include;/usr/lib/x86_64-linux-gnu"
     BUILD_WITH_INSTALL_RPATH TRUE
 )
