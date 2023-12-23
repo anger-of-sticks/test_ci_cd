@@ -10,13 +10,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_COMPILER g++)
 
 # Autodesk Maya
-set(MAYA_DEVKIT_PATH "./maya/devkitBase")
+set(MAYA_DEVKIT_PATH "/home/runner/work/test_ci_cd/test_ci_cd/maya/devkitBase")
 
 # Link directories for Autodesk Maya
 link_directories(
-    ${MAYA_DEVKIT_PATH}/devkit/bin
-    ${MAYA_DEVKIT_PATH}/devkit/lib
-    ${MAYA_DEVKIT_PATH}/applications
+    maya/devkitBase/lib
+    devkitBase/lib
+    ${MAYA_DEVKIT_PATH}/lib
     ${FBX_DEVKIT_PATH}/lib/vs2022/x64/release
     /usr/lib/x86_64-linux-gnu
     /usr/lib/i386-linux-gnu
