@@ -19,9 +19,9 @@ set(FBX_DEVKIT_PATH "fbx/")
 # Link directories for Autodesk Maya
 link_directories(
     ${MAYA_DEVKIT_PATH}/lib
-    ${MAYA_DEVKIT_PATH}/include
-    ${MAYA_DEVKIT_PATH}/include/maya
-    ${MAYA_DEVKIT_PATH}/include/tbb
+    ${MAYA_DEVKIT_PATH}/devkit/synColor/lib
+    ${MAYA_DEVKIT_PATH}/devkit/ufe/lib
+    ${MAYA_DEVKIT_PATH}/devkit/Alembic/lib
     ${MAYA_DEVKIT_PATH}/include/tbb/compat
     ${MAYA_DEVKIT_PATH}/include/tbb/internal
     ${MAYA_DEVKIT_PATH}/include/Python310
@@ -86,6 +86,6 @@ pybind11_add_module(mush PythonCommands.cpp)
 
 # Set the specific paths for certain libraries using -rpath
 set_target_properties(myProject PROPERTIES
-    INSTALL_RPATH "$ORIGIN;/usr/include;/usr/lib/x86_64-linux-gnu"
+    INSTALL_RPATH "$ORIGIN;/usr/include;/usr/lib/aarch64-linux-gnu/android/;/usr/lib/x86_64-linux-gnu"
     BUILD_WITH_INSTALL_RPATH TRUE
 )
