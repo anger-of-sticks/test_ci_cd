@@ -22,18 +22,7 @@ link_directories(
     ${MAYA_DEVKIT_PATH}/devkit/synColor/lib
     ${MAYA_DEVKIT_PATH}/devkit/ufe/lib
     ${MAYA_DEVKIT_PATH}/devkit/Alembic/lib
-    ${MAYA_DEVKIT_PATH}/include/tbb/compat
-    ${MAYA_DEVKIT_PATH}/include/tbb/internal
-    ${MAYA_DEVKIT_PATH}/include/Python310
-    ${MAYA_DEVKIT_PATH}/include/Python310/Python
-    ${MAYA_DEVKIT_PATH}/include/Python310/Python/internal
-    ${MAYA_DEVKIT_PATH}/include/PySide2
-    ${MAYA_DEVKIT_PATH}/include/Cg
-    ${MAYA_DEVKIT_PATH}/include/clew
-    ${MAYA_DEVKIT_PATH}/devkit/synColor
-    ${MAYA_DEVKIT_PATH}/devkit/synColor/lib
-    ${MAYA_DEVKIT_PATH}/devkit/synColor/catalog
-    ${MAYA_DEVKIT_PATH}/devkit/synColor/catalog/transforms
+    ${MAYA_DEVKIT_PATH}/include
     ${FBX_DEVKIT_PATH}/lib/gcc/x64/release
     /usr/lib/x86_64-linux-gnu
     /usr/lib/i386-linux-gnu
