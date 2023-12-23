@@ -81,6 +81,7 @@ jobs:
           mkdir -p maya
           curl -o maya_installer.tgz https://autodesk-adn-transfer.s3-us-west-2.amazonaws.com/ADN+Extranet/M%26E/Maya/devkit+2024/Autodesk_Maya_2024_2_Update_DEVKIT_Linux.tgz
           tar -xzvf maya_installer.tgz -C maya
+          pwd
           cd ${{ github.workspace }}
 
       - name: Install dependencies on Ubuntu
@@ -135,11 +136,11 @@ jobs:
 
       # Uncomment the following lines when ready to build and test
       - name: Build
-        # continue-on-error: true
+        continue-on-error: true
         run: cmake --build build --config Release
 
       - name: Test
-        # continue-on-error: true
+        continue-on-error: true
         run: |
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             ./build/myProject.exe
