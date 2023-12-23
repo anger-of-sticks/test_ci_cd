@@ -14,10 +14,7 @@ set(MAYA_DEVKIT_PATH "maya/devkitBase")
 
 # Link directories for Autodesk Maya
 link_directories(
-    devkitBase/devkit/lib
-    ${MAYA_DEVKIT_PATH}/devkit/bin
     ${MAYA_DEVKIT_PATH}/devkit/lib
-    ${MAYA_DEVKIT_PATH}/applications
     ${FBX_DEVKIT_PATH}/lib/vs2022/x64/release
     /usr/lib/x86_64-linux-gnu
     /usr/lib/i386-linux-gnu
