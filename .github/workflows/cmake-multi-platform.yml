@@ -19,8 +19,8 @@ jobs:
         with:
           path: |
             vcpkg/
-            dependencies/fbx/
-            dependencies/maya/
+            fbx/
+            maya/
           key: vcpkg-${{ runner.os }}-${{ hashFiles('**/vcpkg.json') }}
           restore-keys: |
             vcpkg-${{ runner.os }}-${{ hashFiles('**/vcpkg.json') }}
@@ -43,7 +43,7 @@ jobs:
         if: startsWith(matrix.os, 'windows-')
         run: |
           git clone https://github.com/Microsoft/vcpkg.git
-          cd vcpkg
+          cd ~/vcpkg
           git checkout 2023.12.12
           .\bootstrap-vcpkg.bat
           .\vcpkg integrate install
@@ -52,37 +52,41 @@ jobs:
       - name: Install FBX SDK on Windows
         if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
         run: |
-          mkdir -p dependencies/fbx
+          cd ~
+          mkdir -p fbx
           curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" -o fbx202034_fbxsdk_vs2022_win.exe  https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-3-4/fbx202034_fbxsdk_vs2022_win.exe
 
       - name: Install FBX SDK on Linux
         if: startsWith(matrix.os, 'ubuntu-') || startsWith(matrix.os, 'centos-') && steps.cache-dependencies.outputs.cache-hit != 'true'
         run: |
-          mkdir -p ./dependencies/fbx
+          cd ~
+          mkdir -p dependencies/fbx
           tar -xzvf fbx202034_fbxsdk_linux.tar.gz
           chmod ugo+x fbx202034_fbxsdk_linux
           echo 'yes' > response.txt
           echo 'n' >> response.txt
-          ./fbx202034_fbxsdk_linux ./dependencies/fbx < response.txt
+          ./fbx202034_fbxsdk_linux ~/fbx < response.txt
 
       - name: Install Maya SDK on Windows
         if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
         run: |
-          mkdir -p dependencies/maya
-          curl -o dependencies/maya/maya_installer.zip https://autodesk-adn-transfer.s3-us-west-2.amazonaws.com/ADN+Extranet/M%26E/Maya/devkit+2024/Autodesk_Maya_2024_2_Update_DEVKIT_Windows.zip
-          Expand-Archive -Path ./dependencies/maya/maya_installer.zip -DestinationPath ./dependencies/maya
+          cd ~
+          mkdir -p maya
+          curl -o maya_installer.zip https://autodesk-adn-transfer.s3-us-west-2.amazonaws.com/ADN+Extranet/M%26E/Maya/devkit+2024/Autodesk_Maya_2024_2_Update_DEVKIT_Windows.zip
+          Expand-Archive -Path maya_installer.zip -DestinationPath ~/maya
 
       - name: Install Maya SDK on Linux
         if: startsWith(matrix.os, 'ubuntu-') || startsWith(matrix.os, 'centos-') && steps.cache-dependencies.outputs.cache-hit != 'true'
         run: |
-          mkdir -p dependencies/maya
+          cd ~
+          mkdir -p maya
           curl -o maya_installer.tgz https://autodesk-adn-transfer.s3-us-west-2.amazonaws.com/ADN+Extranet/M%26E/Maya/devkit+2024/Autodesk_Maya_2024_2_Update_DEVKIT_Linux.tgz
-          tar -xzvf maya_installer.tgz -C dependencies/maya
+          tar -xzvf maya_installer.tgz -C ~/maya
 
       - name: Install dependencies
         if: startsWith(matrix.os, 'ubuntu-') && steps.cache-dependencies.outputs.cache-hit != 'true'
         run: |
-          cd vcpkg
+          cd ~/vcpkg
           ./vcpkg install alembic eigen3 glm glad glfw3 fmt asio curl nlohmann-json pybind11 libxml2
           cd ..
 
@@ -90,7 +94,7 @@ jobs:
         if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
         run: |
           powershell -Command "(Invoke-WebRequest -Uri https://git.io/JnHTY -OutFile install_zlib.bat)"; ./install_zlib.bat; del install_zlib.bat
-          cd vcpkg
+          cd ~/vcpkg
           .\vcpkg install eigen3 glm glad glfw3 fmt asio curl nlohmann-json pybind11 libxml2
           .\vcpkg install alembic:x64-windows
           cd ..

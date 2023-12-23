@@ -10,10 +10,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_COMPILER g++)
 
 # Autodesk Maya
-set(MAYA_DEVKIT_PATH "dependencies/maya/devkitBase")
+set(MAYA_DEVKIT_PATH "maya/devkitBase")
 
 # Link directories for Autodesk Maya
 link_directories(
+    devkitBase/devkit/lib
     ${MAYA_DEVKIT_PATH}/devkit/bin
     ${MAYA_DEVKIT_PATH}/devkit/lib
     ${MAYA_DEVKIT_PATH}/applications
@@ -25,7 +26,7 @@ link_directories(
 include_directories(${MAYA_DEVKIT_PATH}/include)
 
 # Autodesk FBX
-set(FBX_DEVKIT_PATH "dependencies/fbx")
+set(FBX_DEVKIT_PATH "fbx/")
 
 
 # Link directories for Autodesk FBX
@@ -61,11 +62,11 @@ target_link_libraries(myProject
     asio::asio
     nlohmann_json::nlohmann_json
     CURL::libcurl
-    ${MAYA_DEVKIT_PATH}/devkit/lib/libOpenMaya.so
-    ${MAYA_DEVKIT_PATH}/devkit/lib/libOpenMayaAnim.so
-    ${MAYA_DEVKIT_PATH}/devkit/lib/libOpenMayaRender.so
-    ${MAYA_DEVKIT_PATH}/devkit/lib/libOpenMayaUI.so
-    ${MAYA_DEVKIT_PATH}/devkit/lib/libFoundation.so
+    OpenMaya
+    OpenMayaAnim
+    OpenMayaRender
+    OpenMayaUI
+    Foundation
     libfbxsdk.a
     pybind11::embed
     pybind11::module
