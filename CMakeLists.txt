@@ -29,6 +29,7 @@ set(FBX_DEVKIT_PATH "fbx/")
 link_directories(${FBX_DEVKIT_PATH}/lib/gcc/x64/release)
 include_directories(${FBX_DEVKIT_PATH}/include)
 
+
 # Find packages installed with vcpkg
 find_package(ZLIB REQUIRED)
 find_package(Alembic CONFIG REQUIRED)
@@ -47,6 +48,11 @@ find_package(pybind11 CONFIG REQUIRED)
 include_directories(${Python_INCLUDE_DIRS})
 link_directories(${Python_LIBRARY_DIRS})
 
+#PkgConfig
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(xml2 REQUIRED IMPORTED_TARGET xml2)
+
+
 # Test project
 add_executable(myProject PythonCommands.cpp main.cpp)
 target_link_libraries(myProject
@@ -63,10 +69,10 @@ target_link_libraries(myProject
     OpenMayaRender
     OpenMayaUI
     Foundation
+    PkgConfig::xml2
     libfbxsdk.a
     pybind11::embed
     pybind11::module
-    ${LIBXML2_LIBRARY}
 )
 
 # Add a Python module, No need to link myPythonModule with myApp
