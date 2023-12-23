@@ -11,13 +11,9 @@ set(CMAKE_CXX_COMPILER g++)
 
 # Autodesk Maya
 set(MAYA_DEVKIT_PATH "maya/devkitBase")
-file(GLOB_RECURSE LIB_SOURCES "${MAYA_DEVKIT_PATH}/**/*.so")
-target_sources(myProject PRIVATE ${LIB_SOURCES})
 
 # Link directories for Autodesk Maya
 link_directories(
-    maya/devkitBase/lib
-    devkitBase/lib
     ${MAYA_DEVKIT_PATH}/lib
     ${FBX_DEVKIT_PATH}/lib/vs2022/x64/release
     /usr/lib/x86_64-linux-gnu
