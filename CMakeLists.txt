@@ -23,6 +23,8 @@ link_directories(
     ${MAYA_DEVKIT_PATH}/devkit/ufe/lib
     ${MAYA_DEVKIT_PATH}/devkit/Alembic/lib
     ${MAYA_DEVKIT_PATH}/include
+    ${MAYA_DEVKIT_PATH}/plug-ins
+    ${MAYA_DEVKIT_PATH}/applications
     ${FBX_DEVKIT_PATH}/lib/gcc/x64/release
     /usr/lib/x86_64-linux-gnu
     /usr/lib/i386-linux-gnu
