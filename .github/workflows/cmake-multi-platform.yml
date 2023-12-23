@@ -86,6 +86,7 @@ jobs:
       - name: Install dependencies on Ubuntu
         if: startsWith(matrix.os, 'ubuntu-') && steps.cache-dependencies.outputs.cache-hit != 'true'
         run: |
+          cd vcpkg
           ./vcpkg install alembic eigen3 glm glad glfw3 fmt asio curl nlohmann-json pybind11 libxml2
           cd ${{ github.workspace }}
 
@@ -93,7 +94,7 @@ jobs:
         if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
         run: |
           powershell -Command "(Invoke-WebRequest -Uri https://git.io/JnHTY -OutFile install_zlib.bat)"; ./install_zlib.bat; del install_zlib.bat
-          cd ~/vcpkg
+          cd vcpkg
           .\vcpkg install eigen3 glm glad glfw3 fmt asio curl nlohmann-json pybind11 libxml2
           .\vcpkg install alembic:x64-windows
           cd ${{ github.workspace }}
