@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_COMPILER g++)
 
 # Autodesk Maya
-set(MAYA_DEVKIT_PATH "/home/runner/work/test_ci_cd/test_ci_cd/maya/devkitBase")
+set(MAYA_DEVKIT_PATH "maya/devkitBase")
 file(GLOB_RECURSE LIB_SOURCES "${MAYA_DEVKIT_PATH}/**/*.so")
 target_sources(myProject PRIVATE ${LIB_SOURCES})
 
