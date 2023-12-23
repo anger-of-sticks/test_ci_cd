@@ -43,10 +43,6 @@ find_package(CURL REQUIRED)
 find_package(Python COMPONENTS Interpreter Development REQUIRED)
 find_package(pybind11 CONFIG REQUIRED)
 
-# PkgConfig for libxml2
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(LIBXML2 REQUIRED IMPORTED_TARGET xml2)
-
 # Test project
 add_executable(myProject PythonCommands.cpp main.cpp)
 target_link_libraries(myProject
@@ -63,7 +59,6 @@ target_link_libraries(myProject
     OpenMayaRender
     OpenMayaUI
     Foundation
-    PkgConfig::LIBXML2
     libfbxsdk.a
     pybind11::embed
     pybind11::module
