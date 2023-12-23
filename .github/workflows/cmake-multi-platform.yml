@@ -87,7 +87,6 @@ jobs:
       - name: Install dependencies on Ubuntu
         if: startsWith(matrix.os, 'ubuntu-') && steps.cache-dependencies.outputs.cache-hit != 'true'
         run: |
-          sudo apt-get install libxml2-dev
           cd vcpkg
           ./vcpkg install alembic eigen3 glm glad glfw3 fmt asio curl nlohmann-json pybind11 libxml2
           cd ${{ github.workspace }}
@@ -127,7 +126,9 @@ jobs:
 
       - name: Configure Ubuntu CMake
         if: startsWith(matrix.os, 'ubuntu-')
-        run: cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+        run: |
+          sudo apt-get install libxml2-dev libxml2
+          cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
 
       - name: Configure Windows CMake
         if: startsWith(matrix.os, 'windows-latest')
