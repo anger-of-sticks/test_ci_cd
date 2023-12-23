@@ -12,23 +12,22 @@ set(CMAKE_CXX_COMPILER g++)
 # Autodesk Maya
 set(MAYA_DEVKIT_PATH "maya/devkitBase")
 
+# Autodesk FBX
+set(FBX_DEVKIT_PATH "fbx/")
+
 # Link directories for Autodesk Maya
 link_directories(
     ${MAYA_DEVKIT_PATH}/lib
-    ${FBX_DEVKIT_PATH}/lib/vs2022/x64/release
+    ${FBX_DEVKIT_PATH}/lib/gcc/x64/release
     /usr/lib/x86_64-linux-gnu
     /usr/lib/i386-linux-gnu
 )
 
 include_directories(${MAYA_DEVKIT_PATH}/include)
 
-# Autodesk FBX
-set(FBX_DEVKIT_PATH "fbx/")
-
 # Link directories for Autodesk FBX
 link_directories(${FBX_DEVKIT_PATH}/lib/gcc/x64/release)
 include_directories(${FBX_DEVKIT_PATH}/include)
-
 
 # Find packages installed with vcpkg
 find_package(ZLIB REQUIRED)
@@ -44,14 +43,9 @@ find_package(CURL REQUIRED)
 find_package(Python COMPONENTS Interpreter Development REQUIRED)
 find_package(pybind11 CONFIG REQUIRED)
 
-# Include directories for Python
-include_directories(${Python_INCLUDE_DIRS})
-link_directories(${Python_LIBRARY_DIRS})
-
-#PkgConfig
+# PkgConfig for libxml2
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(libxml2 REQUIRED IMPORTED_TARGET libxml2)
-
+pkg_check_modules(LIBXML2 REQUIRED IMPORTED_TARGET xml2)
 
 # Test project
 add_executable(myProject PythonCommands.cpp main.cpp)
@@ -69,7 +63,7 @@ target_link_libraries(myProject
     OpenMayaRender
     OpenMayaUI
     Foundation
-    PkgConfig::libxml2
+    PkgConfig::LIBXML2
     libfbxsdk.a
     pybind11::embed
     pybind11::module
