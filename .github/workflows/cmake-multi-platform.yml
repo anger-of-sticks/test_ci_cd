@@ -138,7 +138,9 @@ jobs:
       # Uncomment the following lines when ready to build and test
       - name: Build
         if: startsWith(matrix.os, 'ubuntu-')
-        run: cmake --build build --config Release
+        run: |
+          export LDFLAGS="-Wl,--copy-dt-needed-entries"
+          cmake --build build --config Release
 
       - name: Test
         if: startsWith(matrix.os, 'ubuntu-')

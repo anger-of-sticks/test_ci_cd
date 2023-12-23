@@ -11,7 +11,6 @@ set(CMAKE_CXX_COMPILER g++)
 
 # Autodesk Maya
 set(MAYA_DEVKIT_PATH "maya/devkitBase")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lxml2")
 
 # Autodesk FBX
 set(FBX_DEVKIT_PATH "fbx/")
