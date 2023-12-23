@@ -50,7 +50,7 @@ link_directories(${Python_LIBRARY_DIRS})
 
 #PkgConfig
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(xml2 REQUIRED IMPORTED_TARGET xml2)
+pkg_check_modules(libxml REQUIRED IMPORTED_TARGET libxml)
 
 
 # Test project
@@ -69,7 +69,7 @@ target_link_libraries(myProject
     OpenMayaRender
     OpenMayaUI
     Foundation
-    PkgConfig::xml2
+    PkgConfig::libxml
     libfbxsdk.a
     pybind11::embed
     pybind11::module
