@@ -75,7 +75,7 @@ target_link_libraries(myProject
     OpenMayaRender
     OpenMayaUI
     Foundation
-    $<$<STREQUAL:$<PLATFORM_ID>,Windows>:libfbxsdk-md.lib>
+    $<$<STREQUAL:$<PLATFORM_ID>,Windows>:${FBX_DEVKIT_PATH}/lib/vs2022/arm64/debug/libfbxsdk-md.lib>
     $<$<STREQUAL:$<PLATFORM_ID>,Linux>:libfbxsdk.a>
     xml2
     pybind11::embed
