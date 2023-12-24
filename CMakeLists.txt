@@ -14,7 +14,7 @@ set(MAYA_DEVKIT_PATH "maya/devkitBase")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--copy-dt-needed-entries")
 
 # Autodesk FBX
-set(FBX_DEVKIT_PATH "fbx")
+set(FBX_DEVKIT_PATH "D:/a/test_ci_cd/test_ci_cd/fbx")
 
 # Link directories for Maya and Fbx
 link_directories(
@@ -31,6 +31,7 @@ link_directories(
     ${MAYA_DEVKIT_PATH}/applications
     ${FBX_DEVKIT_PATH}/lib/gcc/x64/release
     ${FBX_DEVKIT_PATH}/lib/vs2022/arm64debug
+    D:\a\test_ci_cd\test_ci_cd\fbx\lib\vs2022\arm64\debug\
     /usr/lib/x86_64-linux-gnu
     /usr/lib/i386-linux-gnu
 )
@@ -75,7 +76,7 @@ target_link_libraries(myProject
     OpenMayaRender
     OpenMayaUI
     Foundation
-    $<$<STREQUAL:$<PLATFORM_ID>,Windows>:${FBX_DEVKIT_PATH}/lib/vs2022/arm64/debug/libfbxsdk-md>
+    $<$<STREQUAL:$<PLATFORM_ID>,Windows>:libfbxsdk-md>
     $<$<STREQUAL:$<PLATFORM_ID>,Linux>:libfbxsdk.a>
     xml2
     pybind11::embed
