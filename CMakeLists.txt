@@ -30,7 +30,7 @@ link_directories(
     ${MAYA_DEVKIT_PATH}/plug-ins
     ${MAYA_DEVKIT_PATH}/applications
     ${FBX_DEVKIT_PATH}/lib/gcc/x64/release
-    ${FBX_DEVKIT_PATH}\lib\vs2022\arm64\debug
+    ${FBX_DEVKIT_PATH}/lib/vs2022/arm64debug
     /usr/lib/x86_64-linux-gnu
     /usr/lib/i386-linux-gnu
 )
@@ -38,8 +38,8 @@ link_directories(
 include_directories(
     ${MAYA_DEVKIT_PATH}/include
     ${FBX_DEVKIT_PATH}/include
-    ${FBX_DEVKIT_PATH}\include\libxml2\libxml
-    )
+    ${FBX_DEVKIT_PATH}/include/libxml2/libxml
+)
 
 # Link directories for Autodesk FBX
 link_directories(${FBX_DEVKIT_PATH}/lib/gcc/x64/release)
