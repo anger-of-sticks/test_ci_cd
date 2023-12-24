@@ -55,106 +55,106 @@ jobs:
           mkdir -p fbx
           curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" -o fbx/fbx202034_fbxsdk_vs2022_win.exe  https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-3-4/fbx202034_fbxsdk_vs2022_win.exe
           fbx/fbx202034_fbxsdk_vs2022_win.exe /S /D=${{ github.workspace }}/fbx
-          ls -R "${{ github.workspace }}/fbx"
+          ls -R C://Program Files/Autodesk
           cd ${{ github.workspace }}
 
-      - name: Install FBX SDK on Linux
-        if: startsWith(matrix.os, 'centos-') || startsWith(matrix.os, 'centos-') && steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p fbx
-          tar -xzvf fbx202034_fbxsdk_linux.tar.gz
-          chmod ugo+x fbx202034_fbxsdk_linux
-          echo 'yes' > response.txt
-          echo 'n' >> response.txt
-          ./fbx202034_fbxsdk_linux fbx < response.txt
-          cd ${{ github.workspace }}
+      # - name: Install FBX SDK on Linux
+      #   if: startsWith(matrix.os, 'centos-') || startsWith(matrix.os, 'centos-') && steps.cache-dependencies.outputs.cache-hit != 'true'
+      #   run: |
+      #     mkdir -p fbx
+      #     tar -xzvf fbx202034_fbxsdk_linux.tar.gz
+      #     chmod ugo+x fbx202034_fbxsdk_linux
+      #     echo 'yes' > response.txt
+      #     echo 'n' >> response.txt
+      #     ./fbx202034_fbxsdk_linux fbx < response.txt
+      #     cd ${{ github.workspace }}
 
-      - name: Install Maya SDK on Windows
-        if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p maya
-          curl -o maya_installer.zip https://autodesk-adn-transfer.s3-us-west-2.amazonaws.com/ADN+Extranet/M%26E/Maya/devkit+2024/Autodesk_Maya_2024_2_Update_DEVKIT_Windows.zip
-          Expand-Archive -Path maya_installer.zip -DestinationPath maya
-              cd ${{ github.workspace }}
+      # - name: Install Maya SDK on Windows
+      #   if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
+      #   run: |
+      #     mkdir -p maya
+      #     curl -o maya_installer.zip https://autodesk-adn-transfer.s3-us-west-2.amazonaws.com/ADN+Extranet/M%26E/Maya/devkit+2024/Autodesk_Maya_2024_2_Update_DEVKIT_Windows.zip
+      #     Expand-Archive -Path maya_installer.zip -DestinationPath maya
+      #         cd ${{ github.workspace }}
 
-      - name: Install Maya SDK on Linux
-        if: startsWith(matrix.os, 'centos-') || startsWith(matrix.os, 'centos-') && steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p maya
-          curl -o maya_installer.tgz https://autodesk-adn-transfer.s3-us-west-2.amazonaws.com/ADN+Extranet/M%26E/Maya/devkit+2024/Autodesk_Maya_2024_2_Update_DEVKIT_Linux.tgz
-          cd maya
-          tar xzvf ../maya_installer.tgz
-          cd ${{ github.workspace }}
+      # - name: Install Maya SDK on Linux
+      #   if: startsWith(matrix.os, 'centos-') || startsWith(matrix.os, 'centos-') && steps.cache-dependencies.outputs.cache-hit != 'true'
+      #   run: |
+      #     mkdir -p maya
+      #     curl -o maya_installer.tgz https://autodesk-adn-transfer.s3-us-west-2.amazonaws.com/ADN+Extranet/M%26E/Maya/devkit+2024/Autodesk_Maya_2024_2_Update_DEVKIT_Linux.tgz
+      #     cd maya
+      #     tar xzvf ../maya_installer.tgz
+      #     cd ${{ github.workspace }}
 
-      - name: Install dependencies on centos
-        if: startsWith(matrix.os, 'centos-') && steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: |
-          cd vcpkg
-          ./vcpkg install alembic eigen3 glm glad glfw3 fmt asio curl nlohmann-json pybind11 libxml2
-          cd ${{ github.workspace }}
+      # - name: Install dependencies on centos
+      #   if: startsWith(matrix.os, 'centos-') && steps.cache-dependencies.outputs.cache-hit != 'true'
+      #   run: |
+      #     cd vcpkg
+      #     ./vcpkg install alembic eigen3 glm glad glfw3 fmt asio curl nlohmann-json pybind11 libxml2
+      #     cd ${{ github.workspace }}
 
-      - name: Install dependencies on Windows
-        if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: |
-          powershell -Command "(Invoke-WebRequest -Uri https://git.io/JnHTY -OutFile install_zlib.bat)"; ./install_zlib.bat; del install_zlib.bat
-          cd vcpkg
-          .\vcpkg install eigen3 glm glad glfw3 fmt asio curl nlohmann-json pybind11 libxml2
-          .\vcpkg install alembic:x64-windows
-          cd ${{ github.workspace }}
+      # - name: Install dependencies on Windows
+      #   if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
+      #   run: |
+      #     powershell -Command "(Invoke-WebRequest -Uri https://git.io/JnHTY -OutFile install_zlib.bat)"; ./install_zlib.bat; del install_zlib.bat
+      #     cd vcpkg
+      #     .\vcpkg install eigen3 glm glad glfw3 fmt asio curl nlohmann-json pybind11 libxml2
+      #     .\vcpkg install alembic:x64-windows
+      #     cd ${{ github.workspace }}
       
-      # - name: Archive Linux Installer
+      # # - name: Archive Linux Installer
+      # #   if: startsWith(matrix.os, 'centos-')
+      # #   run: |
+      # #     cd ${{ github.workspace }}
+      # #     tar -czvf installer_linux.tar.gz vcpkg/ dependencies/fbx/ dependencies/maya/
+
+      # # - name: Archive Windows Installer
+      # #   if: startsWith(matrix.os, 'windows-latest') 
+      # #   run: |
+      # #     cd ${{ github.workspace }}
+      # #     tar -czvf installer_windows.tar.gz vcpkg/ dependencies/fbx/ dependencies/maya/
+      
+      # # - uses: actions/upload-artifact@v2
+      # #   if: startsWith(matrix.os, 'windows-latest')
+      # #   with:
+      # #     name: installer-windows
+      # #     path: ${{ github.workspace }}/installer_windows.tar.gz
+      
+      # # - uses: actions/upload-artifact@v2
+      # #   if: startsWith(matrix.os, 'centos-latest')
+      # #   with:
+      # #     name: installer-linux
+      # #     path: ${{ github.workspace }}/installer_linux.tar.gz
+
+      # - name: Configure centos CMake
       #   if: startsWith(matrix.os, 'centos-')
       #   run: |
-      #     cd ${{ github.workspace }}
-      #     tar -czvf installer_linux.tar.gz vcpkg/ dependencies/fbx/ dependencies/maya/
+      #     sudo apt-get -y install libtbb-dev android-libbase
+      #     sudo apt update
+      #     sudo ldconfig
+      #     export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
+      #     cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
 
-      # - name: Archive Windows Installer
-      #   if: startsWith(matrix.os, 'windows-latest') 
-      #   run: |
-      #     cd ${{ github.workspace }}
-      #     tar -czvf installer_windows.tar.gz vcpkg/ dependencies/fbx/ dependencies/maya/
-      
-      # - uses: actions/upload-artifact@v2
+      # - name: Configure Windows CMake
       #   if: startsWith(matrix.os, 'windows-latest')
-      #   with:
-      #     name: installer-windows
-      #     path: ${{ github.workspace }}/installer_windows.tar.gz
-      
-      # - uses: actions/upload-artifact@v2
-      #   if: startsWith(matrix.os, 'centos-latest')
-      #   with:
-      #     name: installer-linux
-      #     path: ${{ github.workspace }}/installer_linux.tar.gz
+      #   env:
+      #     FBX_LIB_PATH: C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.2\lib\vs2015\x64\release
+      #     FBX_INCLUDE_PATH: C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.2\include
+      #   run: |
+      #     echo "FBX_LIB_PATH=${FBX_LIB_PATH}" >> $GITHUB_ENV
+      #     echo "FBX_INCLUDE_PATH=${FBX_INCLUDE_PATH}" >> $GITHUB_ENV
+      #     cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=D:/a/test_ci_cd/test_ci_cd/vcpkg/scripts/buildsystems/vcpkg.cmake
 
-      - name: Configure centos CMake
-        if: startsWith(matrix.os, 'centos-')
-        run: |
-          sudo apt-get -y install libtbb-dev android-libbase
-          sudo apt update
-          sudo ldconfig
-          export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
-          cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+      # - name: Build
+      #   continue-on-error: true
+      #   run: |
+      #     cmake --build build --config Release
 
-      - name: Configure Windows CMake
-        if: startsWith(matrix.os, 'windows-latest')
-        env:
-          FBX_LIB_PATH: C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.2\lib\vs2015\x64\release
-          FBX_INCLUDE_PATH: C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.2\include
-        run: |
-          echo "FBX_LIB_PATH=${FBX_LIB_PATH}" >> $GITHUB_ENV
-          echo "FBX_INCLUDE_PATH=${FBX_INCLUDE_PATH}" >> $GITHUB_ENV
-          cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=D:/a/test_ci_cd/test_ci_cd/vcpkg/scripts/buildsystems/vcpkg.cmake
-
-      - name: Build
-        continue-on-error: true
-        run: |
-          cmake --build build --config Release
-
-      - name: Test
-        continue-on-error: true
-        run: |
-          if [[ "$RUNNER_OS" == "Windows" ]]; then
-            ./build/myProject.exe
-          else
-            ./build/myProject
-          fi
+      # - name: Test
+      #   continue-on-error: true
+      #   run: |
+      #     if [[ "$RUNNER_OS" == "Windows" ]]; then
+      #       ./build/myProject.exe
+      #     else
+      #       ./build/myProject
+      #     fi
