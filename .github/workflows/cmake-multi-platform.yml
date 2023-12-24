@@ -136,8 +136,8 @@ jobs:
       - name: Configure Windows CMake
         if: startsWith(matrix.os, 'windows-latest')
         run: |
-        ls maya
-        cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=D:/a/test_ci_cd/test_ci_cd/vcpkg/scripts/buildsystems/vcpkg.cmake
+          ls maya
+          cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=D:/a/test_ci_cd/test_ci_cd/vcpkg/scripts/buildsystems/vcpkg.cmake
 
       # Uncomment the following lines when ready to build and test
       - name: Build
