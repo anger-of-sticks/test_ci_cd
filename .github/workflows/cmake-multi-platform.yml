@@ -50,7 +50,6 @@ jobs:
           cd ${{ github.workspace }}
 
       - name: Install FBX SDK on Windows
-        continue-on-error: true
         if: startsWith(matrix.os, 'windows-')
         run: |
           mkdir -p fbx
