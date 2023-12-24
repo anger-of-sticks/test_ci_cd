@@ -16,7 +16,7 @@ set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--copy-dt-needed
 # Autodesk FBX
 set(FBX_DEVKIT_PATH "fbx/")
 
-# Link directories for Autodesk Maya
+# Link directories for Maya and Fbx
 link_directories(
     maya/lib
     maya
@@ -30,14 +30,14 @@ link_directories(
     ${MAYA_DEVKIT_PATH}/plug-ins
     ${MAYA_DEVKIT_PATH}/applications
     ${FBX_DEVKIT_PATH}/lib/gcc/x64/release
-    ${FBX_DEVKIT_PATH}/Autodesk/FBX/FBX SDK/2020.3.2/lib/vs2015/x64/release
+    ${FBX_DEVKIT_PATH}/lib
     /usr/lib/x86_64-linux-gnu
     /usr/lib/i386-linux-gnu
 )
 
 include_directories(
     ${MAYA_DEVKIT_PATH}/include
-    ${FBX_DEVKIT_PATH}/Autodesk/FBX/FBX SDK/2020.3.2/include
+    ${FBX_DEVKIT_PATH}/include
     )
 
 # Link directories for Autodesk FBX
