@@ -59,7 +59,9 @@ jobs:
 
       - name: Search for Autodesk folder
         run: |
-          Get-ChildItem -Path D:\ -Recurse -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -eq "Autodesk" }
+          ls "D:\Program Files\"
+          ls "C:\Program Files\"
+          Get-ChildItem -Path "D:\Program Files\" -Recurse -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -eq "Autodesk" }
 
       # - name: Install FBX SDK on Linux
       #   if: startsWith(matrix.os, 'centos-') || startsWith(matrix.os, 'centos-') && steps.cache-dependencies.outputs.cache-hit != 'true'
