@@ -73,8 +73,7 @@ jobs:
           mkdir -p maya
           curl -o maya_installer.zip https://autodesk-adn-transfer.s3-us-west-2.amazonaws.com/ADN+Extranet/M%26E/Maya/devkit+2024/Autodesk_Maya_2024_2_Update_DEVKIT_Windows.zip
           Expand-Archive -Path maya_installer.zip -DestinationPath maya
-          ls maya
-          cd ${{ github.workspace }}
+              cd ${{ github.workspace }}
 
       - name: Install Maya SDK on Linux
         if: startsWith(matrix.os, 'centos-') || startsWith(matrix.os, 'centos-') && steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -136,7 +135,9 @@ jobs:
 
       - name: Configure Windows CMake
         if: startsWith(matrix.os, 'windows-latest')
-        run: cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=D:/a/test_ci_cd/test_ci_cd/vcpkg/scripts/buildsystems/vcpkg.cmake
+        run: |
+        ls maya
+        cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=D:/a/test_ci_cd/test_ci_cd/vcpkg/scripts/buildsystems/vcpkg.cmake
 
       # Uncomment the following lines when ready to build and test
       - name: Build
