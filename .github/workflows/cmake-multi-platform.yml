@@ -62,7 +62,7 @@ jobs:
       - name: Find Fbx
         if: startsWith(matrix.os, 'windows-') 
         run: |
-          ls -lR fbx/
+          ls -R fbx/
          
       # - name: Install FBX SDK on Linux
       #   if: startsWith(matrix.os, 'centos-') || startsWith(matrix.os, 'centos-') && steps.cache-dependencies.outputs.cache-hit != 'true'
