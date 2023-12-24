@@ -13,41 +13,41 @@ jobs:
         with:
           fetch-depth: 0
           
-      - name: Cache vcpkg, maya, fbx
-        id: cache-dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            vcpkg/
-            fbx/
-            maya/
-          key: vcpkg-${{ runner.os }}-${{ hashFiles('**/vcpkg.json') }}
-          restore-keys: |
-            vcpkg-${{ runner.os }}-${{ hashFiles('**/vcpkg.json') }}
-            vcpkg-${{ runner.os }}-
-            vcpkg-
+      # - name: Cache vcpkg, maya, fbx
+      #   id: cache-dependencies
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       vcpkg/
+      #       fbx/
+      #       maya/
+      #     key: vcpkg-${{ runner.os }}-${{ hashFiles('**/vcpkg.json') }}
+      #     restore-keys: |
+      #       vcpkg-${{ runner.os }}-${{ hashFiles('**/vcpkg.json') }}
+      #       vcpkg-${{ runner.os }}-
+      #       vcpkg-
 
-      - name: Set up vcpkg on centos
-        if: startsWith(matrix.os, 'centos-') && steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: |
-          git clone https://github.com/Microsoft/vcpkg.git
-          cd vcpkg
-          git checkout 2023.12.12
-          ./bootstrap-vcpkg.sh
-          chmod +x vcpkg
-          ./vcpkg integrate install
-          sudo apt-get install -y libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
-          cd ${{ github.workspace }}
+      # - name: Set up vcpkg on centos
+      #   if: startsWith(matrix.os, 'centos-') && steps.cache-dependencies.outputs.cache-hit != 'true'
+      #   run: |
+      #     git clone https://github.com/Microsoft/vcpkg.git
+      #     cd vcpkg
+      #     git checkout 2023.12.12
+      #     ./bootstrap-vcpkg.sh
+      #     chmod +x vcpkg
+      #     ./vcpkg integrate install
+      #     sudo apt-get install -y libxinerama-dev libxcursor-dev xorg-dev libglu1-mesa-dev pkg-config
+      #     cd ${{ github.workspace }}
 
-      - name: Set up vcpkg on Windows
-        if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: |
-          git clone https://github.com/Microsoft/vcpkg.git
-          cd vcpkg
-          git checkout 2023.12.12
-          .\bootstrap-vcpkg.bat
-          .\vcpkg integrate install
-          cd ${{ github.workspace }}
+      # - name: Set up vcpkg on Windows
+      #   if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
+      #   run: |
+      #     git clone https://github.com/Microsoft/vcpkg.git
+      #     cd vcpkg
+      #     git checkout 2023.12.12
+      #     .\bootstrap-vcpkg.bat
+      #     .\vcpkg integrate install
+      #     cd ${{ github.workspace }}
 
       - name: Install FBX SDK on Windows
         if: startsWith(matrix.os, 'windows-')
