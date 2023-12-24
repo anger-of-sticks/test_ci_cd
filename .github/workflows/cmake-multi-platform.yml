@@ -6,7 +6,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [centos-latest, windows-latest]
+        os: [centos-7.9, windows-latest]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
