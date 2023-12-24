@@ -59,7 +59,7 @@ jobs:
 
       - name: Search for Autodesk folder
         run: |
-          ls "D:\Program Files\"
+          ls "D:\"
           ls "C:\Program Files\"
           Get-ChildItem -Path "D:\Program Files\" -Recurse -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -eq "Autodesk" }
 
