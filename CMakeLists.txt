@@ -70,9 +70,10 @@ target_link_libraries(myProject
     OpenMayaRender
     OpenMayaUI
     Foundation
-    libfbxsdk.a
+    $<$<PLATFORM_ID:Windows>libfbxsdk.lib>
+    $<$<PLATFORM_ID:Linux>:libfbxsdk.a>
     xml2
-    pybind11::embed
+    pybind11::embeda
     pybind11::module
 )
 
@@ -80,7 +81,14 @@ target_link_libraries(myProject
 pybind11_add_module(mush PythonCommands.cpp)
 
 # Set the specific paths for certain libraries using -rpath
-set_target_properties(myProject PROPERTIES
-    INSTALL_RPATH "$ORIGIN;/lib;/lib/x86_64-linux-gnu;/usr/lib;/usr/lib32;/usr/include;/usr/lib/aarch64-linux-gnu/android;/usr/lib/x86_64-linux-gnu"
-    BUILD_WITH_INSTALL_RPATH TRUE
-)
+if (WIN32)
+    set_target_properties(myProject PROPERTIES
+        INSTALL_RPATH "$ORIGIN;C:\\Program Files\\Autodesk\\FBX\\FBX SDK\\2020.3.2\\lib\\vs2015\\x64\\release;C:\\Program Files\\Autodesk\\FBX\\FBX SDK\\2020.3.2\\include"
+        BUILD_WITH_INSTALL_RPATH TRUE
+    )
+else()
+    set_target_properties(myProject PROPERTIES
+        INSTALL_RPATH "$ORIGIN;/lib;/lib/x86_64-linux-gnu;/usr/lib;/usr/lib32;/usr/include;/usr/lib/aarch64-linux-gnu/android;/usr/lib/x86_64-linux-gnu"
+        BUILD_WITH_INSTALL_RPATH TRUE
+    )
+endif()
