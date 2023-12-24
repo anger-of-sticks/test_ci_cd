@@ -128,7 +128,7 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu-')
         run: |
           sudo apt -y purge libicu-dev icu-devtools libxml2-dev
-          sudo apt-get -y install libtbb-dev libicu-dev icu-devtools libxml2-dev libxml
+          sudo apt-get -y install libtbb-dev libicu-dev icu-devtools libxml2-dev
           sudo apt update
           sudo ldconfig
           export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
