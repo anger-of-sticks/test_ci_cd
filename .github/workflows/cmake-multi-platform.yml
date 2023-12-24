@@ -55,8 +55,7 @@ jobs:
           mkdir -p fbx
           curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" -o fbx/fbx202034_fbxsdk_vs2022_win.exe  https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-3-4/fbx202034_fbxsdk_vs2022_win.exe
           fbx/fbx202034_fbxsdk_vs2022_win.exe /S /D=${{ github.workspace }}/fbx
-          D:
-          dir Autodesk /s
+          find / -type D -name "Autodesk" 2>/dev/null
           cd ${{ github.workspace }}
 
       # - name: Install FBX SDK on Linux
