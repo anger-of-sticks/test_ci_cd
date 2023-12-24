@@ -51,7 +51,7 @@ jobs:
           cd ${{ github.workspace }}
 
       - name: Install FBX SDK on Windows
-        if: startsWith(matrix.os, 'windows-')
+        if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
         run: |
           mkdir -p fbx-sdk
           mkdir -p fbx
@@ -60,7 +60,7 @@ jobs:
           cd ${{ github.workspace }}
 
       - name: Find Fbx
-        if: startsWith(matrix.os, 'windows-')
+        if: startsWith(matrix.os, 'windows-') 
         run: |
           ls -lR fbx/
          
