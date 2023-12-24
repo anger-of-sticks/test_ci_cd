@@ -78,7 +78,7 @@ target_link_libraries(myProject
     Foundation
     $<$<STREQUAL:$<PLATFORM_ID>,Windows>:libfbxsdk-md>
     $<$<STREQUAL:$<PLATFORM_ID>,Linux>:libfbxsdk.a>
-    xml2
+    $<$<STREQUAL:$<PLATFORM_ID>,Linux>:xml2>
     pybind11::embed
     pybind11::module
 )
