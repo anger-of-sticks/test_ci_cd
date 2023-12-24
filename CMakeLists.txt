@@ -45,6 +45,7 @@ include_directories(
 # Link directories for Autodesk FBX
 link_directories(${FBX_DEVKIT_PATH}/lib/gcc/x64/release)
 include_directories(${FBX_DEVKIT_PATH}/include)
+include_directories("D:/a/test_ci_cd/test_ci_cd/fbx/include/fbxsdk.h")
 
 # Find packages installed with vcpkg
 find_package(ZLIB REQUIRED)
