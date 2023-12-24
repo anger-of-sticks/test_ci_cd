@@ -141,21 +141,21 @@ jobs:
       #     export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
       #     cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
 
-      # - name: Configure Windows CMake
-      #   if: startsWith(matrix.os, 'windows-latest')
-      #   run: |
-      #     cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake
+      - name: Configure Windows CMake
+        if: startsWith(matrix.os, 'windows-latest')
+        run: |
+          cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake
 
-      # - name: Build
-      #   continue-on-error: true
-      #   run: |
-      #     cmake --build build --config Release
+      - name: Build
+        continue-on-error: true
+        run: |
+          cmake --build build --config Release
 
-      # - name: Test
-      #   continue-on-error: true
-      #   run: |
-      #     if [[ "$RUNNER_OS" == "Windows" ]]; then
-      #       ./build/myProject.exe
-      #     else
-      #       ./build/myProject
-      #     fi
+      - name: Test
+        continue-on-error: true
+        run: |
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            ./build/myProject.exe
+          else
+            ./build/myProject
+          fi
