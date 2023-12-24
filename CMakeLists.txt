@@ -31,7 +31,7 @@ link_directories(
     ${MAYA_DEVKIT_PATH}/applications
     ${FBX_DEVKIT_PATH}/lib/gcc/x64/release
     ${FBX_DEVKIT_PATH}/lib/vs2022/arm64debug
-    D:\a\test_ci_cd\test_ci_cd\fbx\lib\vs2022\arm64\debug\
+    D:/a/test_ci_cd/test_ci_cd/fbx/lib/vs2022/arm64/debug/
     /usr/lib/x86_64-linux-gnu
     /usr/lib/i386-linux-gnu
 )
