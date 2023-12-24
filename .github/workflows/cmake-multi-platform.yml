@@ -73,6 +73,7 @@ jobs:
           mkdir -p maya
           curl -o maya_installer.zip https://autodesk-adn-transfer.s3-us-west-2.amazonaws.com/ADN+Extranet/M%26E/Maya/devkit+2024/Autodesk_Maya_2024_2_Update_DEVKIT_Windows.zip
           Expand-Archive -Path maya_installer.zip -DestinationPath maya
+          ls maya
           cd ${{ github.workspace }}
 
       - name: Install Maya SDK on Linux
