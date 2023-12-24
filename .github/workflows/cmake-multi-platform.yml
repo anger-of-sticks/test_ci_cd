@@ -127,7 +127,8 @@ jobs:
       - name: Configure Ubuntu CMake
         if: startsWith(matrix.os, 'ubuntu-')
         run: |
-          sudo apt-get install libtbb-dev
+          sudo apt-get install libtbb-dev libicu-dev
+          sudo apt update
           export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
           cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
 
