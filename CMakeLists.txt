@@ -30,7 +30,7 @@ link_directories(
     ${MAYA_DEVKIT_PATH}/plug-ins
     ${MAYA_DEVKIT_PATH}/applications
     ${FBX_DEVKIT_PATH}/lib/gcc/x64/release
-    ${FBX_DEVKIT_PATH}/lib
+    ${FBX_DEVKIT_PATH}\lib\vs2022\arm64\debug
     /usr/lib/x86_64-linux-gnu
     /usr/lib/i386-linux-gnu
 )
@@ -38,6 +38,7 @@ link_directories(
 include_directories(
     ${MAYA_DEVKIT_PATH}/include
     ${FBX_DEVKIT_PATH}/include
+    ${FBX_DEVKIT_PATH}\include\libxml2\libxml
     )
 
 # Link directories for Autodesk FBX
@@ -74,7 +75,7 @@ target_link_libraries(myProject
     OpenMayaRender
     OpenMayaUI
     Foundation
-    $<$<STREQUAL:$<PLATFORM_ID>,Windows>:libfbxsdk.lib>
+    $<$<STREQUAL:$<PLATFORM_ID>,Windows>:libfbxsdk-md.lib>
     $<$<STREQUAL:$<PLATFORM_ID>,Linux>:libfbxsdk.a>
     xml2
     pybind11::embed
