@@ -18,6 +18,8 @@ set(FBX_DEVKIT_PATH "fbx/")
 
 # Link directories for Autodesk Maya
 link_directories(
+    maya/lib
+    maya
     ${MAYA_DEVKIT_PATH}/lib
     ${MAYA_DEVKIT_PATH}/bin
     ${MAYA_DEVKIT_PATH}/devkit/bim
