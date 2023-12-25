@@ -25,7 +25,7 @@ jobs:
           key: vcpkg-${{ runner.os }}-${{ hashFiles('**/vcpkg.json') }}
           restore-keys: |
             vcpkg-${{ runner.os }}-${{ hashFiles('**/vcpkg.json') }}
-            vcpkg-${{ runner.os }}
+
 
       - name: Set up vcpkg on Ubuntu
         if: startsWith(matrix.os, 'ubuntu-') && steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -123,7 +123,7 @@ jobs:
       - name: Windows Test
         if: startsWith(matrix.os, 'windows-')
         run: |
-          ./build/myProject.exe
+          build/myProject.exe
       
       - name: Ubuntu Test
         if: startsWith(matrix.os, 'ubuntu-')
