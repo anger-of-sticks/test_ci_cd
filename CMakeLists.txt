@@ -13,8 +13,12 @@ set(CMAKE_CXX_COMPILER g++)
 set(MAYA_DEVKIT_PATH "maya/devkitBase")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--copy-dt-needed-entries")
 
-# Autodesk FBX
-set(FBX_DEVKIT_PATH "C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.2")
+# Set the specific paths for fbx sdk
+if (WIN32)
+    set(FBX_DEVKIT_PATH "C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.2")
+else()
+    set(FBX_DEVKIT_PATH "fbx")
+endif()
 
 # Link directories for Maya and Fbx
 link_directories(
