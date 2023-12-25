@@ -60,7 +60,7 @@ jobs:
       
       - name: Run PowerShell command
         run: |
-          powershell -Command "Get-ChildItem -Path 'D:\' -Recurse -ErrorAction SilentlyContinue -Filter  'fbxsdk*'"
+          powershell -Command "Get-ChildItem -Path 'C:\' -Recurse -ErrorAction SilentlyContinue -Filter  'fbxsdk*'"
 
          
       # - name: Install FBX SDK on Ubuntu
