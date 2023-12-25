@@ -119,11 +119,13 @@ jobs:
       - name: Build
         run: |
           cmake --build build --config Release
+          cd ${{ github.workspace }}
 
       - name: Windows Test
         if: startsWith(matrix.os, 'windows-')
         run: |
           build/myProject.exe
+          cd ${{ github.workspace }}
       
       - name: Ubuntu Test
         if: startsWith(matrix.os, 'ubuntu-')
