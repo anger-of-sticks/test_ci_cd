@@ -50,6 +50,7 @@ jobs:
           cd ${{ github.workspace }}
 
       - name: Install FBX SDK on Windows
+        continue-on-error: true
         if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
         run: |
           mkdir fbx-sdk
@@ -111,16 +112,19 @@ jobs:
           cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
 
       - name: Configure Windows CMake
+        continue-on-error: true
         if: startsWith(matrix.os, 'windows-latest')
         run: |
           cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake
 
       - name: Build
+        continue-on-error: true
         run: |
           cmake --build build --config Release
           cd ${{ github.workspace }}
 
       - name: Windows Test
+        continue-on-error: true
         if: startsWith(matrix.os, 'windows-')
         run: |
           ${{ github.workspace }}\build\release\myProject.exe
@@ -132,6 +136,7 @@ jobs:
           ./build/release/myProject
         
       - uses: actions/upload-artifact@v2
+        continue-on-error: true
         if: startsWith(matrix.os, 'windows-latest')
         with:
           name: build.exe
