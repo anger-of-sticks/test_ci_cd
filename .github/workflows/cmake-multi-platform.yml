@@ -58,10 +58,9 @@ jobs:
           fbx-sdk/fbx202032_fbxsdk_vs2015_win.exe /S
           cd ${{ github.workspace }}
       
-      - name: Run PowerShell command
+      - name: Look For FBX
         run: |
-          powershell -Command "Get-ChildItem -Path 'C:\' -Recurse -ErrorAction SilentlyContinue -Filter  'fbxsdk*'"
-
+          ls -R "C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.2"
          
       # - name: Install FBX SDK on Ubuntu
       #   if: startsWith(matrix.os, 'ubuntu-') || startsWith(matrix.os, 'ubuntu-') && steps.cache-dependencies.outputs.cache-hit != 'true'
