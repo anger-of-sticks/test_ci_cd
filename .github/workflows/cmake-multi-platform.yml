@@ -52,7 +52,7 @@ jobs:
       - name: Install FBX SDK on Windows
         if: startsWith(matrix.os, 'windows-')
         run: |
-          rmdir /s -/q fbx-sdk
+          rmdir /s /q fbx-sdk
           rmdir /s /q fbx
           mkdir fbx-sdk
           mkdir fbx
