@@ -15,7 +15,7 @@ set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--copy-dt-needed
 
 # Set the specific paths for fbx sdk
 if (WIN32)
-    set(FBX_DEVKIT_PATH "C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.2")
+    set(FBX_DEVKIT_PATH "C:\\Program Files\\Autodesk\\\FBX\FBX SDK\\2020.3.2")
 else()
     set(FBX_DEVKIT_PATH "fbx")
 endif()
