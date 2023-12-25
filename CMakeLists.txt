@@ -14,7 +14,7 @@ set(MAYA_DEVKIT_PATH "maya/devkitBase")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--copy-dt-needed-entries")
 
 # Autodesk FBX
-set(FBX_DEVKIT_PATH "D:/a/test_ci_cd/test_ci_cd/fbx")
+set(FBX_DEVKIT_PATH "C:\Program Files\Autodesk\FBX\FBX SDK\2020.3.2")
 
 # Link directories for Maya and Fbx
 link_directories(
@@ -29,24 +29,19 @@ link_directories(
     ${MAYA_DEVKIT_PATH}/include
     ${MAYA_DEVKIT_PATH}/plug-ins
     ${MAYA_DEVKIT_PATH}/applications
-    ${FBX_DEVKIT_PATH}/lib/gcc/x64/release
-    ${FBX_DEVKIT_PATH}/include
-    ${FBX_DEVKIT_PATH}/lib/vs2022/arm64/debug
-    D:/a/test_ci_cd/test_ci_cd/fbx/lib/vs2022/arm64/debug
+    ${FBX_DEVKIT_PATH}/lib/gcc/x64/release ##linux
+    ${FBX_DEVKIT_PATH}\lib\vs2015\x64\debug ## windows
     /usr/lib/x86_64-linux-gnu
     /usr/lib/i386-linux-gnu
 )
 
 include_directories(
+    ## Maya
     ${MAYA_DEVKIT_PATH}/include
-    ${FBX_DEVKIT_PATH}/include
-    ${FBX_DEVKIT_PATH}/include/libxml2/libxml
-)
 
-# Link directories for Autodesk FBX
-link_directories(${FBX_DEVKIT_PATH}/lib/gcc/x64/release)
-include_directories(${FBX_DEVKIT_PATH}/include)
-include_directories("D:/a/test_ci_cd/test_ci_cd/fbx/include/fbxsdk.h")
+    ## FBX
+    ${FBX_DEVKIT_PATH}\include
+)
 
 # Find packages installed with vcpkg
 find_package(ZLIB REQUIRED)
