@@ -57,89 +57,94 @@ jobs:
           curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" -o fbx-sdk/fbx202032_fbxsdk_vs2015_win.exe  https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-3-2/fbx202032_fbxsdk_vs2015_win.exe
           fbx-sdk/fbx202032_fbxsdk_vs2015_win.exe /S
           cd ${{ github.workspace }}
+      
+      - name: Run PowerShell command
+        run: |
+          powershell -Command "Get-ChildItem -Path 'D:\' -Recurse -ErrorAction SilentlyContinue -Filter  'fbxsdk*'"
+
          
-      - name: Install FBX SDK on Ubuntu
-        if: startsWith(matrix.os, 'ubuntu-') || startsWith(matrix.os, 'ubuntu-') && steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p fbx
-          tar -xzvf fbx202034_fbxsdk_linux.tar.gz
-          chmod ugo+x fbx202034_fbxsdk_linux
-          echo 'yes' > response.txt
-          echo 'n' >> response.txt
-          ./fbx202034_fbxsdk_linux fbx < response.txt
-          cd ${{ github.workspace }}
+      # - name: Install FBX SDK on Ubuntu
+      #   if: startsWith(matrix.os, 'ubuntu-') || startsWith(matrix.os, 'ubuntu-') && steps.cache-dependencies.outputs.cache-hit != 'true'
+      #   run: |
+      #     mkdir -p fbx
+      #     tar -xzvf fbx202034_fbxsdk_linux.tar.gz
+      #     chmod ugo+x fbx202034_fbxsdk_linux
+      #     echo 'yes' > response.txt
+      #     echo 'n' >> response.txt
+      #     ./fbx202034_fbxsdk_linux fbx < response.txt
+      #     cd ${{ github.workspace }}
 
-      - name: Install Maya SDK on Windows
-        if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p maya
-          curl -o maya_installer.zip https://autodesk-adn-transfer.s3-us-west-2.amazonaws.com/ADN+Extranet/M%26E/Maya/devkit+2024/Autodesk_Maya_2024_2_Update_DEVKIT_Windows.zip
-          Expand-Archive -Path maya_installer.zip -DestinationPath maya
-              cd ${{ github.workspace }}
+      # - name: Install Maya SDK on Windows
+      #   if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
+      #   run: |
+      #     mkdir -p maya
+      #     curl -o maya_installer.zip https://autodesk-adn-transfer.s3-us-west-2.amazonaws.com/ADN+Extranet/M%26E/Maya/devkit+2024/Autodesk_Maya_2024_2_Update_DEVKIT_Windows.zip
+      #     Expand-Archive -Path maya_installer.zip -DestinationPath maya
+      #         cd ${{ github.workspace }}
 
-      - name: Install Maya SDK on Ubuntu
-        if: startsWith(matrix.os, 'ubuntu-') || startsWith(matrix.os, 'ubuntu-') && steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p maya
-          curl -o maya_installer.tgz https://autodesk-adn-transfer.s3-us-west-2.amazonaws.com/ADN+Extranet/M%26E/Maya/devkit+2024/Autodesk_Maya_2024_2_Update_DEVKIT_Linux.tgz
-          cd maya
-          tar xzvf ../maya_installer.tgz
-          cd ${{ github.workspace }}
+      # - name: Install Maya SDK on Ubuntu
+      #   if: startsWith(matrix.os, 'ubuntu-') || startsWith(matrix.os, 'ubuntu-') && steps.cache-dependencies.outputs.cache-hit != 'true'
+      #   run: |
+      #     mkdir -p maya
+      #     curl -o maya_installer.tgz https://autodesk-adn-transfer.s3-us-west-2.amazonaws.com/ADN+Extranet/M%26E/Maya/devkit+2024/Autodesk_Maya_2024_2_Update_DEVKIT_Linux.tgz
+      #     cd maya
+      #     tar xzvf ../maya_installer.tgz
+      #     cd ${{ github.workspace }}
 
-      - name: Install dependencies on Ubuntu
-        if: startsWith(matrix.os, 'ubuntu-') && steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: |
-          cd vcpkg
-          ./vcpkg install alembic eigen3 glm glad glfw3 fmt asio curl nlohmann-json pybind11 libxml2
-          cd ${{ github.workspace }}
+      # - name: Install dependencies on Ubuntu
+      #   if: startsWith(matrix.os, 'ubuntu-') && steps.cache-dependencies.outputs.cache-hit != 'true'
+      #   run: |
+      #     cd vcpkg
+      #     ./vcpkg install alembic eigen3 glm glad glfw3 fmt asio curl nlohmann-json pybind11 libxml2
+      #     cd ${{ github.workspace }}
 
-      - name: Install dependencies on Windows
-        if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: |
-          powershell -Command "(Invoke-WebRequest -Uri https://git.io/JnHTY -OutFile install_zlib.bat)"; ./install_zlib.bat; del install_zlib.bat
-          cd vcpkg
-          .\vcpkg install eigen3 glm glad glfw3 fmt asio curl nlohmann-json pybind11 libxml2
-          .\vcpkg install alembic:x64-windows
-          cd ${{ github.workspace }}
+      # - name: Install dependencies on Windows
+      #   if: startsWith(matrix.os, 'windows-') && steps.cache-dependencies.outputs.cache-hit != 'true'
+      #   run: |
+      #     powershell -Command "(Invoke-WebRequest -Uri https://git.io/JnHTY -OutFile install_zlib.bat)"; ./install_zlib.bat; del install_zlib.bat
+      #     cd vcpkg
+      #     .\vcpkg install eigen3 glm glad glfw3 fmt asio curl nlohmann-json pybind11 libxml2
+      #     .\vcpkg install alembic:x64-windows
+      #     cd ${{ github.workspace }}
             
-      - name: Configure Ubuntu CMake
-        if: startsWith(matrix.os, 'ubuntu-')
-        run: |
-          sudo apt-get -y install libtbb-dev android-libbase
-          sudo apt update
-          sudo ldconfig
-          export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
-          cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+      # - name: Configure Ubuntu CMake
+      #   if: startsWith(matrix.os, 'ubuntu-')
+      #   run: |
+      #     sudo apt-get -y install libtbb-dev android-libbase
+      #     sudo apt update
+      #     sudo ldconfig
+      #     export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
+      #     cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
 
-      - name: Configure Windows CMake
-        if: startsWith(matrix.os, 'windows-latest')
-        run: |
-          cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake
+      # - name: Configure Windows CMake
+      #   if: startsWith(matrix.os, 'windows-latest')
+      #   run: |
+      #     cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake
 
-      - name: Build
-        run: |
-          cmake --build build --config Release
-          cd ${{ github.workspace }}
+      # - name: Build
+      #   run: |
+      #     cmake --build build --config Release
+      #     cd ${{ github.workspace }}
 
-      - name: Windows Test
-        if: startsWith(matrix.os, 'windows-')
-        run: |
-          ${{ github.workspace }}\build\release\myProject.exe
-          cd ${{ github.workspace }}
+      # - name: Windows Test
+      #   if: startsWith(matrix.os, 'windows-')
+      #   run: |
+      #     ${{ github.workspace }}\build\release\myProject.exe
+      #     cd ${{ github.workspace }}
       
-      - name: Ubuntu Test
-        if: startsWith(matrix.os, 'ubuntu-')
-        run: |
-          ./build/myProject
+      # - name: Ubuntu Test
+      #   if: startsWith(matrix.os, 'ubuntu-')
+      #   run: |
+      #     ./build/myProject
         
-      - uses: actions/upload-artifact@v2
-        if: startsWith(matrix.os, 'windows-latest')
-        with:
-          name: build.exe
-          path: ${{ github.workspace }}\build\release\myProject.exe
+      # - uses: actions/upload-artifact@v2
+      #   if: startsWith(matrix.os, 'windows-latest')
+      #   with:
+      #     name: build.exe
+      #     path: ${{ github.workspace }}\build\release\myProject.exe
       
-      - uses: actions/upload-artifact@v2
-        if: startsWith(matrix.os, 'ubuntu-latest')
-        with:
-          name: unix-myProject
-          path:  ${{ github.workspace }}/build/release/myProject
+      # - uses: actions/upload-artifact@v2
+      #   if: startsWith(matrix.os, 'ubuntu-latest')
+      #   with:
+      #     name: unix-myProject
+      #     path:  ${{ github.workspace }}/build/release/myProject
