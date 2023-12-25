@@ -34,7 +34,7 @@ link_directories(
     ${MAYA_DEVKIT_PATH}/plug-ins
     ${MAYA_DEVKIT_PATH}/applications
     ${FBX_DEVKIT_PATH}/lib/gcc/x64/release ##linux
-    ${FBX_DEVKIT_PATH}\lib\vs2015\x64\debug ## windows
+    ${FBX_DEVKIT_PATH}\\lib\\vs2015\\x64\\debug ## windows
     /usr/lib/x86_64-linux-gnu
     /usr/lib/i386-linux-gnu
 )
@@ -44,7 +44,7 @@ include_directories(
     ${MAYA_DEVKIT_PATH}/include
 
     ## FBX
-    ${FBX_DEVKIT_PATH}\include
+    ${FBX_DEVKIT_PATH}\\include
 )
 
 # Find packages installed with vcpkg
