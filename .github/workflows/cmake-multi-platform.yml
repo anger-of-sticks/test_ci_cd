@@ -1,6 +1,6 @@
 name: Test CI/CD Build
 on:
-  push
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
