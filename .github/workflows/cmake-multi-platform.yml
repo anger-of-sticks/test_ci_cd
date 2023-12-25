@@ -117,16 +117,14 @@ jobs:
           cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake
 
       - name: Build
-        continue-on-error: true
         run: |
           cmake --build build --config Release
           cd ${{ github.workspace }}
 
       - name: Windows Test
-        continue-on-error: true
         if: startsWith(matrix.os, 'windows-')
         run: |
-          build/myProject.exe
+          ${{ github.workspace }}\build\release\myProject.exe
           cd ${{ github.workspace }}
       
       - name: Ubuntu Test
@@ -137,11 +135,11 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'windows-latest')
         with:
-          name: windows-build.exe
-          path: ./build/myProject.exe
+          name: build.exe
+          path: ${{ github.workspace }}\build\release\myProject.exe
       
       - uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'ubuntu-latest')
         with:
           name: unix-myProject
-          path: ./build/myProject
+          path:  ${{ github.workspace }}/build/release/myProject
