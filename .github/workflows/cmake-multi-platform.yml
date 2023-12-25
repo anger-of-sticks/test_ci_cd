@@ -120,13 +120,16 @@ jobs:
         run: |
           cmake --build build --config Release
 
-      - name: Test
+      - name: Windows Test
+        if: startsWith(matrix.os, 'windows-')
         run: |
-          if [[ "$RUNNER_OS" == "Windows" ]]; then
-            ./build/myProject.exe
-          else
-            ./build/myProject
-          fi
+          ./build/myProject.exe
+      
+      - name: Ubuntu Test
+        if: startsWith(matrix.os, 'ubuntu-')
+        run: |
+          ./build/myProject
+        
       - uses: actions/upload-artifact@v2
         if: startsWith(matrix.os, 'windows-latest')
         with:
