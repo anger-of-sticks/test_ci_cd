@@ -55,11 +55,10 @@ jobs:
           mkdir fbx-sdk
           mkdir fbx
           cd fbx-sdk
-          curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" -o fbx202032_fbxsdk_vs2015_win.exe fbx202032_fbxsdk_vs2015_win.exe https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-3-2/fbx202032_fbxsdk_vs2015_win.exe
-          ${{ github.workspace }}\\fbx\\fbx202032_fbxsdk_vs2015_win.exe /S /D=${{ github.workspace }}\fbx
+          curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" -o fbx202032_fbxsdk_vs2015_win.exe https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-3-2/fbx202032_fbxsdk_vs2015_win.exe
+          ${{ github.workspace }}/fbx-sdk/fbx202032_fbxsdk_vs2015_win.exe /S /D=${{ github.workspace }}/fbx
           cd ${{ github.workspace }}
           ls -R fbx
-
          
       # - name: Install FBX SDK on Ubuntu
       #   if: startsWith(matrix.os, 'ubuntu-') || startsWith(matrix.os, 'ubuntu-') && steps.cache-dependencies.outputs.cache-hit != 'true'
